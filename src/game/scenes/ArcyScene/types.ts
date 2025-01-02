@@ -1,4 +1,8 @@
-export type Action = 'view' | 'talk' | 'take'
+export type Action = {
+    id: string
+    description: string
+    result?: string
+}
 
 export type Interaction = {
     id: string;

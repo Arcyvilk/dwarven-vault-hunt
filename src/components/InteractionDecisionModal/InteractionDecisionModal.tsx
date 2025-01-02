@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Action, Interaction } from "../../game/scenes/ArcyScene/types";
+import { Interaction } from "../../game/scenes/ArcyScene/types";
 import { Modal } from "../Modal";
 
 type Props = { 
@@ -22,7 +22,7 @@ export const InteractionDecisionModal = ({
                 <Section>
                     <Icon />
                     <Actions>
-                        {interaction.actions.map(action => <ActionItem action={action} name={interaction.name} />)}
+                        {interaction.actions.map(action => <StyledAction><button>{action.description}</button></StyledAction>)}
                     </Actions>
                 </Section>
             </Content>
@@ -30,14 +30,6 @@ export const InteractionDecisionModal = ({
     )
 }
 
-const ActionItem = ({ action, name }: {action: Action, name: string }) => {
-    if (action === 'view')
-        return <StyledAction>View {name}</StyledAction>
-    if (action === 'talk')
-        return <StyledAction>Talk with {name}</StyledAction>
-    if (action === 'take')
-        return <StyledAction>Take {name}</StyledAction>
-}
 
 const Content = styled.div`
     display: flex;
@@ -82,4 +74,12 @@ const Actions = styled.ul`
 
 const StyledAction = styled.li`
     margin: 24px 0;
+
+    button {
+        background-color: black;
+        color: white;
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
 `

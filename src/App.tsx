@@ -19,7 +19,6 @@ const App = () => {
     EventBus.on('newInteraction', (newInteraction: Interaction) => {
         setInteraction(newInteraction)
         setIsInteractionDecisionVisible(true)
-        console.log(interaction)
     })
 
     return (
