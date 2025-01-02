@@ -12,7 +12,6 @@ export class MainMenu extends Scene
     constructor ()
     {
         super('MainMenu');
-        console.log("MainMenu")
     }
 
     create ()
@@ -28,17 +27,6 @@ export class MainMenu extends Scene
         }).setOrigin(0.5).setDepth(100);
 
         EventBus.emit('current-scene-ready', this);
-    }
-    
-    changeScene ()
-    {
-        if (this.logoTween)
-        {
-            this.logoTween.stop();
-            this.logoTween = null;
-        }
-
-        this.scene.start('Home');
     }
 
     moveLogo (vueCallback: ({ x, y }: { x: number, y: number }) => void)

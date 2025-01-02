@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { IRefPhaserGame, PhaserGame } from './game/PhaserGame';
 import { MainMenu } from './game/scenes/MainMenu';
+import { EventBus } from './game/EventBus';
 
 function App()
 {
@@ -10,6 +11,10 @@ function App()
     //  References to the PhaserGame component (game and scene are exposed)
     const phaserRef = useRef<IRefPhaserGame | null>(null);
     const [spritePosition, setSpritePosition] = useState({ x: 0, y: 0 });
+
+    EventBus.on('playerMovement', ({ x, y }: { x: number, y: number }) => {
+        setSpritePosition({ x, y })
+    })
 
     const changeScene = () => {
 
@@ -31,7 +36,7 @@ function App()
 
             const scene = phaserRef.current.scene as MainMenu;
 
-            if (scene && scene.scene.key === 'MainMenu')
+            if (scene && scene.scene.key === 'Home')
             {
                 // Get the update logo position
                 scene.moveLogo(({ x, y }) => {

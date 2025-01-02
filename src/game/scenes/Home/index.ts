@@ -1,5 +1,6 @@
 import PhaserRaycaster from 'phaser-raycaster'
 import { Scene } from 'phaser';
+import { EventBus } from '../../EventBus';
 
 export class Home extends Scene
 {
@@ -64,7 +65,6 @@ export class Home extends Scene
 
         this.setPlayer()
         this.setPlayerMovement()
-        this.setCollission()
 
         this.setLightningMask(map)
         this.setRaycasting()
@@ -72,10 +72,6 @@ export class Home extends Scene
 
     update(/**time, delta */) {
         // something
-    }
-
-    changeScene() {
-        this.scene.start('GameOver');
     }
 
     setBounds(map: Phaser.Tilemaps.Tilemap) {
@@ -98,8 +94,8 @@ export class Home extends Scene
 
     setPlayer() {
         // Create player sprite and place it in the world
-        const playerStartX = 32 + this.tileSize * 10
-        const playerStartY = 32 + this.tileSize * 5
+        const playerStartX = 1888 // 32 + this.tileSize * 10
+        const playerStartY = 736 // 32 + this.tileSize * 5
         this.player = this.physics.add.image(playerStartX, playerStartY, 'player')
         this.player.setCollideWorldBounds(true)
         this.player.setDepth(5)
@@ -163,26 +159,26 @@ export class Home extends Scene
         this.input.keyboard!.on('keydown-LEFT', () => {
             if (this.isTileCollider('left')) return;
             this.player.x -= this.tileSize
-            // this.playerLight.x -= this.tileSize
             this.updateRays()
+            EventBus.emit('playerMovement', { x: this.player.x, y: this.player.y })
         })
         this.input.keyboard!.on('keydown-RIGHT', () => {
             if (this.isTileCollider('right')) return;
             this.player.x += this.tileSize
-            // this.playerLight.x += this.tileSize
             this.updateRays()
+            EventBus.emit('playerMovement', { x: this.player.x, y: this.player.y })
         })
         this.input.keyboard!.on('keydown-UP', () => {
             if (this.isTileCollider('up')) return;
             this.player.y -= this.tileSize
-            // this.playerLight.y -= this.tileSize
             this.updateRays()
+            EventBus.emit('playerMovement', { x: this.player.x, y: this.player.y })
         })
         this.input.keyboard!.on('keydown-DOWN', () => {
             if (this.isTileCollider('down')) return;
             this.player.y += this.tileSize
-            // this.playerLight.y +=this.tileSize
             this.updateRays()
+            EventBus.emit('playerMovement', { x: this.player.x, y: this.player.y })
         })
     }
 
@@ -242,11 +238,6 @@ export class Home extends Scene
         this.layerDoor?.setScale(2).setCollisionByExclusion([-1])
     }
 
-    setCollission() {
-        // this.physics.add.collider(this.player, this.layerWalls)
-        // this.physics.add.collider(this.player, this.layerFurniture)
-    }
-
     isTileCollider(direction: 'left'|'right'|'down'|'up') {
         const getTilePosition = (): number[] => {
             if (direction === 'left') {
@@ -270,7 +261,7 @@ export class Home extends Scene
         // Check if the tile is present in any of the "collission" layers
         const collissionLayers = [this.layerWalls, this.layerFurniture]
         const collissionTiles = collissionLayers.map(layer => 
-            layer.getTileAtWorldXY(x, y, true).index
+            layer.getTileAtWorldXY(x, y, true)?.index ?? -1
         )
         
         // If yes, the tile is impassable and we have to block player from moving through it
