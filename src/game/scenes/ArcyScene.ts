@@ -213,12 +213,20 @@ export class ArcyScene extends Scene
 
         // Check if the tile is present in any of the "collision" layers
         const collisionTiles = this.collisionLayers.map(layer => 
-            layer.getTileAtWorldXY(x, y, true)?.index ?? -1
+            layer.getTileAtWorldXY(x, y, true)
         )
         
         // If yes, the tile is impassable and we have to block player from moving through it
-        if (collisionTiles.some(index => index !== -1)) return true
+        const collidingTile = collisionTiles.find(tile => tile.index !== -1)
+        if (collidingTile) {
+            this.isTileInteractible(collidingTile)
+            return true
+        }
         return false
+    }
+
+    isTileInteractible(tile: Phaser.Tilemaps.Tile) {
+        console.log(tile)
     }
 }
 
