@@ -10,6 +10,7 @@ export class Game extends Scene
     constructor ()
     {
         super('Game');
+        console.log("Game")
     }
 
     create ()

@@ -12,6 +12,7 @@ export class MainMenu extends Scene
     constructor ()
     {
         super('MainMenu');
+        console.log("MainMenu")
     }
 
     create ()
@@ -37,7 +38,7 @@ export class MainMenu extends Scene
             this.logoTween = null;
         }
 
-        this.scene.start('Game');
+        this.scene.start('Home');
     }
 
     moveLogo (vueCallback: ({ x, y }: { x: number, y: number }) => void)

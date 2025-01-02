@@ -1,0 +1,111 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "building_icons.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "floor_stone_engraved_palette.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 16
+        },
+        "floors.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 4
+        },
+        "fortification_ice.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "fortification_wood.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "glass_floor.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "hidden_rock.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "item_bookcase.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "item_chair.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "item_door.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "item_table.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "items3.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "map.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 433.33333333333326,
+                "y": 309.33333333333326
+            }
+        },
+        "stockpile.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "wall_metal_bars.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "wall_wooden.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "wooden_floor.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Home",
+    "last.imagePath": "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/assets/df_tilesets",
+    "map.height": 42,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 64,
+    "openFiles": [
+        "wall_wooden.tsx",
+        "floors.tsx",
+        "floor_stone_engraved_palette.tsx",
+        "map.tmx"
+    ],
+    "project": "home.tiled-project",
+    "recentFiles": [
+        "items3.tsx",
+        "item_bookcase.tsx",
+        "wall_metal_bars.tsx",
+        "stockpile.tsx",
+        "building_icons.tsx",
+        "fortification_ice.tsx",
+        "item_chair.tsx",
+        "item_table.tsx",
+        "wall_wooden.tsx",
+        "floors.tsx",
+        "floor_stone_engraved_palette.tsx",
+        "map.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}

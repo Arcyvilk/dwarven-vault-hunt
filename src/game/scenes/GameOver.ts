@@ -10,6 +10,7 @@ export class GameOver extends Scene
     constructor ()
     {
         super('GameOver');
+        console.log("GameOver")
     }
 
     create ()
