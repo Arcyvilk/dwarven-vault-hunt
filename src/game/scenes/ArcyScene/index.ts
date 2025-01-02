@@ -176,7 +176,7 @@ export class ArcyScene extends Scene {
 
         // draw rays
         for (const intersection of this.rayIntersections) {
-            // @ts-ignore
+            // @ts-expect-error this works as intended
             this.graphics.strokeLineShape({
                 x1: this.ray.origin.x,
                 y1: this.ray.origin.y,
@@ -225,10 +225,11 @@ export class ArcyScene extends Scene {
     }
 
     checkForInteractions(tile: Phaser.Tilemaps.Tile) {
+        EventBus.emit('obstacleFound', tile.x, tile.y)
         const interaction = this.interactions.find(i => i.x === tile.x && i.y === tile.y)
-        if (!interaction) return
-
-        EventBus.emit('itemInteraction', interaction)
+        if (interaction) {
+            EventBus.emit('newInteraction', interaction)
+        }
     }
 }
 

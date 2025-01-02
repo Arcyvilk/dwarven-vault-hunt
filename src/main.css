@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'DOS';
+    src: url('./assets/fonts/DOS.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html * {
+    font-family: 'DOS';
+    font-size: 18px;
+    letter-spacing: 0.2px;
+    user-select: none;
+}

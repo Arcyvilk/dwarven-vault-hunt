@@ -4,7 +4,7 @@ export const interactions: Interaction[] = [{
     id: 'kufer',
     x: 31,
     y: 6,
-    actions: ['view'],
-    name: 'kufer',
+    actions: ['view', 'talk', 'take'],
+    name: 'Kufer',
     description: "It's a kufer."
 }]
