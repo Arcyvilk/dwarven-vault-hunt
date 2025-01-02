@@ -5,6 +5,7 @@
     },
     "activeFile": "map.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "": {
@@ -59,12 +60,45 @@
             "scaleInEditor": 1
         },
         "map.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 433.33333333333326,
-                "y": 309.33333333333326
+                "x": 1247.5,
+                "y": 231
             }
+        },
+        "map.tmx#building_icons": {
+            "scaleInDock": 2
+        },
+        "map.tmx#floor_stone_engraved_palette": {
+            "scaleInDock": 1
+        },
+        "map.tmx#fortification_wood": {
+            "scaleInDock": 1
+        },
+        "map.tmx#glass_floor": {
+            "scaleInDock": 1
+        },
+        "map.tmx#hidden_rock": {
+            "scaleInDock": 1
+        },
+        "map.tmx#instruments": {
+            "scaleInDock": 3
+        },
+        "map.tmx#item_tool": {
+            "scaleInDock": 4
+        },
+        "map.tmx#items3": {
+            "scaleInDock": 2
+        },
+        "map.tmx#stockpile": {
+            "scaleInDock": 1
+        },
+        "map.tmx#wall_wooden": {
+            "scaleInDock": 1
+        },
+        "map.tmx#wooden_floor": {
+            "scaleInDock": 1
         },
         "stockpile.tsx": {
             "scaleInDock": 3,
@@ -90,13 +124,11 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 64,
     "openFiles": [
-        "wall_wooden.tsx",
-        "floors.tsx",
-        "floor_stone_engraved_palette.tsx",
         "map.tmx"
     ],
     "project": "home.tiled-project",
     "recentFiles": [
+        "map.tmx",
         "items3.tsx",
         "item_bookcase.tsx",
         "wall_metal_bars.tsx",
@@ -107,8 +139,7 @@
         "item_table.tsx",
         "wall_wooden.tsx",
         "floors.tsx",
-        "floor_stone_engraved_palette.tsx",
-        "map.tmx"
+        "floor_stone_engraved_palette.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx"

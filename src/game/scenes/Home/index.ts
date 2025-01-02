@@ -125,7 +125,7 @@ export class Home extends Scene
         this.fov = this.add.graphics({
             fillStyle: {
                 color: 0x000000,
-                alpha: 0.9,
+                alpha: 0.95,
             }
         }).setDepth(29);
         this.fov.setMask(this.mask);
