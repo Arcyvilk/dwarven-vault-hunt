@@ -4,6 +4,17 @@ import { EventBus } from '../EventBus';
 
 export class ArcyScene extends Scene
 {
+    // Basic map related props
+    tileSize: number;
+    map: Phaser.Tilemaps.Tilemap
+    layers: Record<string, Phaser.Tilemaps.TilemapLayer> = {}
+    player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody
+
+    // Body and light collission props
+    collisionLayers: Phaser.Tilemaps.TilemapLayer[]
+    rayCollisionLayers: Phaser.Tilemaps.TilemapLayer[]
+
+    // Raycaster props
     raycasterPlugin: PhaserRaycaster
     raycaster: Raycaster
     ray: Raycaster.Ray
@@ -13,20 +24,10 @@ export class ArcyScene extends Scene
     mask: Phaser.Display.Masks.GeometryMask
     fov: Phaser.GameObjects.Graphics
 
-    controls: any
+    // Control and view props
     camera: Phaser.Cameras.Scene2D.Camera;
-    background: Phaser.GameObjects.Image;
-    gameText: Phaser.GameObjects.Text;
-    player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody
+    controls: Phaser.Cameras.Controls.FixedKeyControl
     cursors: Phaser.Types.Input.Keyboard.CursorKeys
-    playerLight: Phaser.GameObjects.Light
-
-    tileSize: number;
-    map: Phaser.Tilemaps.Tilemap
-    layers: Record<string, Phaser.Tilemaps.TilemapLayer> = {}
-
-    collisionLayers: Phaser.Tilemaps.TilemapLayer[]
-    rayCollisionLayers: Phaser.Tilemaps.TilemapLayer[]
 
     constructor(sceneName: string) {
         super(sceneName);
