@@ -1,14 +1,17 @@
 import PhaserRaycaster from 'phaser-raycaster'
 import { Scene } from 'phaser';
-import { EventBus } from '../EventBus';
+import { EventBus } from '../../EventBus';
+import { Interaction } from './types';
 
-export class ArcyScene extends Scene
-{
+export class ArcyScene extends Scene {
     // Basic map related props
-    tileSize: number;
+    tileSize: number = 64
     map: Phaser.Tilemaps.Tilemap
     layers: Record<string, Phaser.Tilemaps.TilemapLayer> = {}
     player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody
+
+    // Interactions with items on the map
+    interactions: Interaction[]
 
     // Body and light collission props
     collisionLayers: Phaser.Tilemaps.TilemapLayer[]
@@ -29,9 +32,9 @@ export class ArcyScene extends Scene
     controls: Phaser.Cameras.Controls.FixedKeyControl
     cursors: Phaser.Types.Input.Keyboard.CursorKeys
 
-    constructor(sceneName: string) {
-        super(sceneName);
-        this.tileSize = 64
+    constructor(sceneName: string, interactions: Interaction[]) {
+        super(sceneName)
+        this.interactions = interactions
     }
 
     customPreload(tilemapName: string, tilemapPath: string) {
@@ -142,25 +145,21 @@ export class ArcyScene extends Scene
             if (this.isTileCollider('left')) return;
             this.player.x -= this.tileSize
             this.updateRays()
-            EventBus.emit('playerMovement', { x: this.player.x, y: this.player.y })
         })
         this.input.keyboard!.on('keydown-RIGHT', () => {
             if (this.isTileCollider('right')) return;
             this.player.x += this.tileSize
             this.updateRays()
-            EventBus.emit('playerMovement', { x: this.player.x, y: this.player.y })
         })
         this.input.keyboard!.on('keydown-UP', () => {
             if (this.isTileCollider('up')) return;
             this.player.y -= this.tileSize
             this.updateRays()
-            EventBus.emit('playerMovement', { x: this.player.x, y: this.player.y })
         })
         this.input.keyboard!.on('keydown-DOWN', () => {
             if (this.isTileCollider('down')) return;
             this.player.y += this.tileSize
             this.updateRays()
-            EventBus.emit('playerMovement', { x: this.player.x, y: this.player.y })
         })
     }
 
@@ -219,14 +218,17 @@ export class ArcyScene extends Scene
         // If yes, the tile is impassable and we have to block player from moving through it
         const collidingTile = collisionTiles.find(tile => tile.index !== -1)
         if (collidingTile) {
-            this.isTileInteractible(collidingTile)
+            this.checkForInteractions(collidingTile)
             return true
         }
         return false
     }
 
-    isTileInteractible(tile: Phaser.Tilemaps.Tile) {
-        console.log(tile)
+    checkForInteractions(tile: Phaser.Tilemaps.Tile) {
+        const interaction = this.interactions.find(i => i.x === tile.x && i.y === tile.y)
+        if (!interaction) return
+
+        EventBus.emit('itemInteraction', interaction)
     }
 }
 
