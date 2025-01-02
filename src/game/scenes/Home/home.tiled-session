@@ -7,6 +7,9 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
         "building_icons.tsx": {
             "scaleInDock": 2,
             "scaleInEditor": 1
@@ -107,5 +110,6 @@
         "floor_stone_engraved_palette.tsx",
         "map.tmx"
     ],
+    "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx"
 }

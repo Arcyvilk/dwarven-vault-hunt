@@ -1343,6 +1343,11 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
+phaser-raycaster@^0.10.11:
+  version "0.10.11"
+  resolved "https://registry.yarnpkg.com/phaser-raycaster/-/phaser-raycaster-0.10.11.tgz#4df943997dbfc00e58285862705deb43f44919c0"
+  integrity sha512-yM3dMT3yq3hX4mz+58chJhdDj3WTj6pd/F6aQ4FYcqNpYj7YzflNhs7hJuM7YDTZ+6Lyb2KyH27leCWmDZrjnw==
+
 phaser@^3.87.0:
   version "3.87.0"
   resolved "https://registry.yarnpkg.com/phaser/-/phaser-3.87.0.tgz#209f1673b311a3f76d59f14b785699709a8f9cf5"
