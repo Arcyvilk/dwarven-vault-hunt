@@ -23,6 +23,8 @@ export class ArcyScene extends Scene
 
     tileSize: number;
     map: Phaser.Tilemaps.Tilemap
+    layers: Record<string, Phaser.Tilemaps.TilemapLayer> = {}
+
     collisionLayers: Phaser.Tilemaps.TilemapLayer[]
     rayCollisionLayers: Phaser.Tilemaps.TilemapLayer[]
 
@@ -37,7 +39,7 @@ export class ArcyScene extends Scene
         this.load.image('player', 'player.png')
     }
 
-    customCreate(
+    preLayerLoad(
         tilemapName: string,
         playerStartX: number,
         playerStartY: number
@@ -48,13 +50,10 @@ export class ArcyScene extends Scene
 
         this.setPlayer(playerStartX, playerStartY)
         this.setPlayerMovement()
-
-        // load layers here
-
-        // raycasting after
     }
 
-    customLightning() {
+    postLayerLoad() {
+        Object.values(this.layers).forEach(layer => layer.setScale(2))
         this.setLightningMask()
         this.setRaycasting()
     }
@@ -107,7 +106,7 @@ export class ArcyScene extends Scene
         this.fov = this.add.graphics({
             fillStyle: {
                 color: 0x000000,
-                alpha: 0.95,
+                alpha: 0.925,
             }
         }).setDepth(29);
         this.fov.setMask(this.mask);

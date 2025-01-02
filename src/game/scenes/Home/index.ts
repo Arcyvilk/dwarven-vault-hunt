@@ -2,13 +2,6 @@ import { ArcyScene } from '../ArcyScene';
 
 export class Home extends ArcyScene
 {
-    layerWalls: Phaser.Tilemaps.TilemapLayer
-    layerFloor: Phaser.Tilemaps.TilemapLayer
-    layerFurniture: Phaser.Tilemaps.TilemapLayer
-    layerItems: Phaser.Tilemaps.TilemapLayer
-    layerStockpiles: Phaser.Tilemaps.TilemapLayer
-    layerDoor: Phaser.Tilemaps.TilemapLayer
-
     constructor () {
         super('Home');
     }
@@ -19,9 +12,9 @@ export class Home extends ArcyScene
     }
 
     create() {
-        this.customCreate('map_home', 1888, 736)
+        this.preLayerLoad('map_home', 1888, 736)
         this.loadLayers(this.map)
-        this.customLightning()
+        this.postLayerLoad()
     }
 
     update(/**time, delta */) {
@@ -54,23 +47,18 @@ export class Home extends ArcyScene
         const tiles_items3 = map.addTilesetImage('items3', "items3");
         const tiles_hidden_rock = map.addTilesetImage('hidden_rock', "hidden_rock");
         const tiles_instruments = map.addTilesetImage('instruments', "instruments");
-    
-        this.layerFloor = map.createLayer('floor', [tiles_floor_stone_engraved_palette!, tiles_glass_floor!, tiles_wooden_floor!, tiles_building_icons!], 0, 0)!;
-        this.layerWalls = map.createLayer('walls', [tiles_wall_wooden!, tiles_fortification_wood!, tiles_hidden_rock!], 0, 0)!;
-        this.layerFurniture = map.createLayer('furniture', [tiles_building_icons!, tiles_item_tool!], 0, 0)!;
-        this.layerStockpiles = map.createLayer('stockpiles', tiles_stockpile!, 0, 0)!;
-        this.layerItems = map.createLayer('items', [tiles_item_tool!, tiles_wall_wooden!, tiles_items3!, tiles_instruments!, tiles_building_icons!], 0, 0)!;
-        this.layerDoor = map.createLayer('door', [tiles_building_icons!], 0, 0)!;
-    
-        this.layerFloor?.setScale(2)
-        this.layerWalls?.setScale(2).setCollisionByExclusion([-1])
-        this.layerFurniture?.setScale(2).setCollisionByExclusion([-1])
-        this.layerStockpiles?.setScale(2)
-        this.layerItems?.setScale(2)
-        this.layerDoor?.setScale(2).setCollisionByExclusion([-1])
 
-        this.collisionLayers = [this.layerWalls, this.layerFurniture]
-        this.rayCollisionLayers = [this.layerWalls]
+        this.layers.layerFloor = map.createLayer('floor', [tiles_floor_stone_engraved_palette!, tiles_glass_floor!, tiles_wooden_floor!, tiles_building_icons!], 0, 0)!;
+        this.layers.layerWalls = map.createLayer('walls', [tiles_wall_wooden!, tiles_fortification_wood!, tiles_hidden_rock!], 0, 0)!;
+        this.layers.layerFurniture = map.createLayer('furniture', [tiles_building_icons!, tiles_item_tool!], 0, 0)!;
+        this.layers.layerStockpiles = map.createLayer('stockpiles', tiles_stockpile!, 0, 0)!;
+        this.layers.layerItems = map.createLayer('items', [tiles_item_tool!, tiles_wall_wooden!, tiles_items3!, tiles_instruments!, tiles_building_icons!], 0, 0)!;
+        this.layers.layerDoor = map.createLayer('door', [tiles_building_icons!], 0, 0)!;
+    
+        this.layers.layerWalls?.setCollisionByExclusion([-1])
+
+        this.collisionLayers = [this.layers.layerWalls, this.layers.layerFurniture]
+        this.rayCollisionLayers = [this.layers.layerWalls]
     }
 }
 
