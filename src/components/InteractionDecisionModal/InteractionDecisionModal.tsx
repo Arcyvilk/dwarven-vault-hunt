@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { Interaction } from "../../game/scenes/ArcyScene/types"
 import { Modal } from "../Modal"
+import { mapOptions } from "../../utils"
 
 type Props = {
   interaction: Interaction
@@ -12,6 +13,8 @@ export const InteractionDecisionModal = ({
   isOpen,
   onClose,
 }: Props) => {
+  const actions = mapOptions(interaction.actions)
+
   return (
     <Modal isOpen={isOpen}>
       <Content>
@@ -22,9 +25,10 @@ export const InteractionDecisionModal = ({
         <Section>
           <Icon />
           <Actions>
-            {interaction.actions.map((action) => (
+            {actions.map((action) => (
               <StyledAction>
-                <button>{action.description}</button>
+                <span style={{ color: "#0da50d" }}>{action.letter}</span>
+                <span>{action.description}</span>
               </StyledAction>
             ))}
           </Actions>
@@ -60,7 +64,7 @@ const Section = styled.div`
   display: flex;
   width: 100%;
   align-items: flex-start;
-  gap: 64px;
+  gap: 48px;
 `
 
 const Icon = styled.image`
@@ -69,20 +73,18 @@ const Icon = styled.image`
   border: 3px double #333333;
 `
 
-const Actions = styled.ul`
-  list-style-type: lower-latin;
-  margin: 0;
-  padding: 0;
+const Actions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `
 
-const StyledAction = styled.li`
-  margin: 24px 0;
-
-  button {
-    background-color: black;
-    color: white;
-    outline: none;
-    border: none;
-    cursor: pointer;
-  }
+const StyledAction = styled.button`
+  display: flex;
+  gap: 24px;
+  background-color: black;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
 `
