@@ -1,0 +1,11 @@
+{
+  "extends": "eslint-config-mme",
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "semi": false
+      }
+    ]
+  }
+}
