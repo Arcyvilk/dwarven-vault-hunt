@@ -1,5 +1,5 @@
 import { Boot } from './scenes/Boot';
-import { Home } from './scenes/Home';
+import { House } from './scenes/House';
 import { GameOver } from './scenes/GameOver';
 import { Game as MainGame } from './scenes/Game';
 import { MainMenu } from './scenes/MainMenu';
@@ -22,7 +22,7 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: [
         Boot,
         Preloader,
-        Home,
+        House,
         MainMenu,
         MainGame,
         GameOver

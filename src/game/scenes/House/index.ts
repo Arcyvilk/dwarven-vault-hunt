@@ -1,10 +1,10 @@
 import { ArcyScene } from '../ArcyScene'
 import { interactions } from './interactions';
 
-export class Home extends ArcyScene
+export class House extends ArcyScene
 {
     constructor () {
-        super('Home', interactions);
+        super('House', interactions);
     }
 
     preload() {
