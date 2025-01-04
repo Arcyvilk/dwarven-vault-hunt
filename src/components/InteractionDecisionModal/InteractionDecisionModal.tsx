@@ -1,7 +1,8 @@
 import styled from "styled-components"
 import { Interaction } from "../../game/scenes/ArcyScene/types"
 import { Modal } from "../Modal"
-import { mapOptions, useKeyboardNavigation } from "../../utils"
+import { mapOptions } from "../../utils"
+import { useKeyboardNavigation } from "../../hooks"
 
 type Props = {
   interaction: Interaction
