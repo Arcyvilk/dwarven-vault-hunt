@@ -1,4 +1,10 @@
 import { NPC } from "../NPC"
-import { drillerData } from "./data"
 
-export const Driller = new NPC({ x: 19, y: 5 }, drillerData)
+const drillerData = {
+  species: "Dwarf",
+  name: "Driller",
+  surname: "Drillersson",
+  description: "He likes to drill.",
+}
+
+export const Driller = new NPC("driller", { x: 19, y: 5 }, drillerData)

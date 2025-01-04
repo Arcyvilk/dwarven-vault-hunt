@@ -1,10 +1,11 @@
 import { useEffect } from "react"
+import { mapOptions } from "../utils"
 
-type Action = {
-  key: string
-  fn: () => void
-}
-export const useKeyboardNavigation = (actions: Action[]) => {
+export const useKeyboardNavigation = <T extends { fn: () => void }>(
+  rawActions: T[],
+) => {
+  const actions = mapOptions(rawActions)
+
   useEffect(() => {
     const keyDownHandler = (e: globalThis.KeyboardEvent) => {
       actions.forEach((a) => {
@@ -21,4 +22,6 @@ export const useKeyboardNavigation = (actions: Action[]) => {
       document.removeEventListener("keydown", keyDownHandler)
     }
   }, [])
+
+  return { actions }
 }

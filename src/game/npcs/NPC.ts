@@ -1,38 +1,38 @@
+import { EventBus } from "../EventBus"
 import { NPCAction, NPCData, NPCLocation } from "./types"
 
 export class NPC {
-  public npc: NPCData
+  public id: string
+  public data: NPCData
   public location: NPCLocation
   public actions: NPCAction[]
 
-  constructor(npcLocation: NPCLocation, npcData: NPCData) {
-    this.npc = npcData
+  constructor(id: string, npcLocation: NPCLocation, npcData: NPCData) {
+    this.id = id
+    this.data = npcData
     this.location = npcLocation
     this.actions = [
       {
         type: "talk",
-        description: `Start new conversation with the ${this.npc.species} ${this.npc.name} ${this.npc.surname}`,
+        description: `Start new conversation with the ${this.data.species} ${this.data.name} ${this.data.surname}`,
+        fn: () => {
+          EventBus.emit("npc_talk", this)
+        },
       },
       {
         type: "view",
-        description: `View the ${this.npc.species} ${this.npc.name} ${this.npc.surname}`,
+        description: `View the ${this.data.species} ${this.data.name} ${this.data.surname}`,
+        fn: () => {
+          EventBus.emit("npc_view", this)
+        },
       },
       {
         type: "attack",
-        description: `Attack the ${this.npc.species} ${this.npc.name} ${this.npc.surname}`,
+        description: `Attack the ${this.data.species} ${this.data.name} ${this.data.surname}`,
+        fn: () => {
+          EventBus.emit("npc_attack", this)
+        },
       },
     ]
-  }
-
-  onTalk() {
-    return this.actions.find((action) => action.type === "talk")
-  }
-
-  onView() {
-    return this.actions.find((action) => action.type === "view")
-  }
-
-  onAttack() {
-    return this.actions.find((action) => action.type === "attack")
   }
 }

@@ -32,19 +32,14 @@ const App = () => {
     <div id="app">
       <PhaserGame ref={phaserRef} />
       <DebugSidebar />
-      {itemInteraction && (
+      {isInteractionDecisionVisible && itemInteraction && (
         <InteractionDecisionModal
-          isOpen={isInteractionDecisionVisible}
           interaction={itemInteraction}
           onClose={onClose}
         />
       )}
-      {npcInteraction && (
-        <InteractionDecisionModal
-          isOpen={isInteractionDecisionVisible}
-          npc={npcInteraction}
-          onClose={onClose}
-        />
+      {isInteractionDecisionVisible && npcInteraction && (
+        <InteractionDecisionModal npc={npcInteraction} onClose={onClose} />
       )}
     </div>
   )

@@ -35,6 +35,6 @@ export const chooseOption = <T>(options: T[], choice: string) => {
 export const mapOptions = <T>(options: T[]) => {
   return options.map((option: T, index: number) => ({
     ...option,
-    letter: alphabet[index],
+    key: alphabet[index],
   }))
 }

@@ -10,6 +10,9 @@ export const generalInteractions: ItemInteraction[] = [
         id: "leave",
         description: "Leave the home",
         type: "simple",
+        fn: () => {
+          alert("you leave the home")
+        },
       },
     ],
     name: "Door",

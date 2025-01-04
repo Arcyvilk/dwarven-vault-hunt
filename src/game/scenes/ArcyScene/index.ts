@@ -257,19 +257,15 @@ export class ArcyScene extends Scene {
     const interaction = this.itemInteractions.find(
       (item) => item.x === obstacle.x && item.y === obstacle.y,
     )
-
-    if (interaction) {
-      EventBus.emit("itemInteraction", interaction)
-    }
+    // If no item interaction, the undefined is emit anyway
+    EventBus.emit("itemInteraction", interaction)
   }
 
   checkForNPCInteraction(obstacle: Phaser.Tilemaps.Tile) {
     const npc = this.npcs.find(
       (npc) => npc.location.x === obstacle.x && npc.location.y === obstacle.y,
     )
-
-    if (npc) {
-      EventBus.emit("npcInteraction", npc)
-    }
+    // If no npc interaction, the undefined is emit anyway
+    EventBus.emit("npcInteraction", npc)
   }
 }

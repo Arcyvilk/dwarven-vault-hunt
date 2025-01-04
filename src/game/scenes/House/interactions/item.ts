@@ -10,14 +10,17 @@ export const itemInteractions: ItemInteraction[] = [
         id: "view",
         description: "View the kufer",
         type: "simple",
-        result: "This is a kufer.",
+        fn: () => {
+          alert("you look at the kufer")
+        },
       },
       {
         id: "open",
         description: "Open the kufer",
         type: "simple",
-        result:
-          "It is full of sheets, pillows, blankets and other similar items.",
+        fn: () => {
+          alert("you open the kufer")
+        },
       },
     ],
     name: "Kufer",

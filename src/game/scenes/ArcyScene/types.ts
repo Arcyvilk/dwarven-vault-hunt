@@ -1,8 +1,8 @@
 export type Action = {
   id: string
   description: string
-  type: "simple" | "talk" | "view_npc" | "view_item" | "attack"
-  result?: string
+  type: string
+  fn: () => void
 }
 
 export type ItemInteraction = {
