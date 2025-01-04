@@ -1,21 +1,27 @@
 import styled from "styled-components"
-import { Interaction } from "../../game/scenes/ArcyScene/types"
+import { ItemInteraction } from "../../game/scenes/ArcyScene/types"
 import { Modal } from "../Modal"
 import { mapOptions } from "../../utils"
-import { useKeyboardNavigation } from "../../hooks"
+import { NPC } from "../../game/npcs/NPC"
 
 type Props = {
-  interaction: Interaction
+  interaction?: ItemInteraction
+  npc?: NPC
   isOpen: boolean
   onClose: () => void
 }
 export const InteractionDecisionModal = ({
   interaction,
+  npc,
   isOpen,
   onClose,
 }: Props) => {
-  const actions = mapOptions(interaction.actions)
-  // useKeyboardNavigation()
+  const getActions = () => {
+    if (interaction) return mapOptions(interaction.actions)
+    if (npc) return mapOptions(npc.actions)
+    return []
+  }
+  const actions = getActions()
 
   if (!isOpen) return null
   return (

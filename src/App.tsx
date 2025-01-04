@@ -1,19 +1,30 @@
 import { useRef, useState } from "react"
 import { IRefPhaserGame, PhaserGame } from "./game/PhaserGame"
 import { EventBus } from "./game/EventBus"
-import { Interaction } from "./game/scenes/ArcyScene/types"
+import { ItemInteraction } from "./game/scenes/ArcyScene/types"
 import { InteractionDecisionModal, DebugSidebar } from "./components"
+import { NPC } from "./game/npcs/NPC"
 
 const App = () => {
   //  References to the PhaserGame component (game and scene are exposed)
   const phaserRef = useRef<IRefPhaserGame | null>(null)
 
-  const [interaction, setInteraction] = useState<Interaction>()
+  const [itemInteraction, setItemInteraction] = useState<ItemInteraction>()
+  const [npcInteraction, setNPCInteraction] = useState<NPC>()
   const [isInteractionDecisionVisible, setIsInteractionDecisionVisible] =
     useState(false)
 
-  EventBus.on("newInteraction", (newInteraction: Interaction) => {
-    setInteraction(newInteraction)
+  const onClose = () => {
+    setIsInteractionDecisionVisible(false)
+  }
+
+  EventBus.on("itemInteraction", (interaction: ItemInteraction) => {
+    setItemInteraction(interaction)
+    setIsInteractionDecisionVisible(true)
+  })
+
+  EventBus.on("npcInteraction", (interaction: NPC) => {
+    setNPCInteraction(interaction)
     setIsInteractionDecisionVisible(true)
   })
 
@@ -21,13 +32,18 @@ const App = () => {
     <div id="app">
       <PhaserGame ref={phaserRef} />
       <DebugSidebar />
-      {interaction && (
+      {itemInteraction && (
         <InteractionDecisionModal
           isOpen={isInteractionDecisionVisible}
-          interaction={interaction}
-          onClose={() => {
-            setIsInteractionDecisionVisible(false)
-          }}
+          interaction={itemInteraction}
+          onClose={onClose}
+        />
+      )}
+      {npcInteraction && (
+        <InteractionDecisionModal
+          isOpen={isInteractionDecisionVisible}
+          npc={npcInteraction}
+          onClose={onClose}
         />
       )}
     </div>

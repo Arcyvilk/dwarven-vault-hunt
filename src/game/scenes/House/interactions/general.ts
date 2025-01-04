@@ -1,6 +1,6 @@
-import { Interaction } from "../../ArcyScene/types"
+import { ItemInteraction } from "../../ArcyScene/types"
 
-export const generalInteractions: Interaction[] = [
+export const generalInteractions: ItemInteraction[] = [
   {
     id: "exit",
     x: 37,

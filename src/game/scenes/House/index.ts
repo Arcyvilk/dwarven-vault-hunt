@@ -1,9 +1,11 @@
+import { Driller } from "../../npcs/Driller"
 import { ArcyScene } from "../ArcyScene"
 import { interactions } from "./interactions"
 
 export class House extends ArcyScene {
   constructor() {
     super("House", interactions)
+    this.npcs = [Driller]
   }
 
   preload() {

@@ -1,7 +1,8 @@
 import PhaserRaycaster from "phaser-raycaster"
 import { Scene } from "phaser"
 import { EventBus } from "../../EventBus"
-import { Interaction } from "./types"
+import { ItemInteraction } from "./types"
+import { NPC } from "../../npcs/NPC"
 
 export class ArcyScene extends Scene {
   // Basic map related props
@@ -11,7 +12,8 @@ export class ArcyScene extends Scene {
   player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody
 
   // Interactions with items on the map
-  interactions: Interaction[]
+  itemInteractions: ItemInteraction[] = []
+  npcs: NPC[] = []
 
   // Body and light collission props
   collisionLayers: Phaser.Tilemaps.TilemapLayer[]
@@ -32,9 +34,9 @@ export class ArcyScene extends Scene {
   controls: Phaser.Cameras.Controls.FixedKeyControl
   cursors: Phaser.Types.Input.Keyboard.CursorKeys
 
-  constructor(sceneName: string, interactions: Interaction[]) {
+  constructor(sceneName: string, itemInteractions: ItemInteraction[]) {
     super(sceneName)
-    this.interactions = interactions
+    this.itemInteractions = itemInteractions
   }
 
   customPreload(tilemapName: string, tilemapPath: string) {
@@ -163,22 +165,22 @@ export class ArcyScene extends Scene {
 
   setPlayerMovement() {
     this.input.keyboard!.on("keydown-LEFT", () => {
-      if (this.isTileCollider("left")) return
+      if (this.isObstacle("left")) return
       this.player.x -= this.tileSize
       this.updateRays()
     })
     this.input.keyboard!.on("keydown-RIGHT", () => {
-      if (this.isTileCollider("right")) return
+      if (this.isObstacle("right")) return
       this.player.x += this.tileSize
       this.updateRays()
     })
     this.input.keyboard!.on("keydown-UP", () => {
-      if (this.isTileCollider("up")) return
+      if (this.isObstacle("up")) return
       this.player.y -= this.tileSize
       this.updateRays()
     })
     this.input.keyboard!.on("keydown-DOWN", () => {
-      if (this.isTileCollider("down")) return
+      if (this.isObstacle("down")) return
       this.player.y += this.tileSize
       this.updateRays()
     })
@@ -211,7 +213,7 @@ export class ArcyScene extends Scene {
     }
   }
 
-  isTileCollider(direction: "left" | "right" | "down" | "up") {
+  isObstacle(direction: "left" | "right" | "down" | "up") {
     const getTilePosition = (): number[] => {
       if (direction === "left") {
         return [this.player.x - this.tileSize, this.player.y]
@@ -237,21 +239,37 @@ export class ArcyScene extends Scene {
     )
 
     // If yes, the tile is impassable and we have to block player from moving through it
-    const collidingTile = collisionTiles.find((tile) => tile.index !== -1)
-    if (collidingTile) {
-      this.checkForInteractions(collidingTile)
+    const obstacle = collisionTiles.find((tile) => tile.index !== -1)
+    if (obstacle) {
+      this.checkForInteraction(obstacle)
       return true
     }
     return false
   }
 
-  checkForInteractions(tile: Phaser.Tilemaps.Tile) {
-    EventBus.emit("obstacleFound", tile.x, tile.y)
-    const interaction = this.interactions.find(
-      (i) => i.x === tile.x && i.y === tile.y,
+  checkForInteraction(obstacle: Phaser.Tilemaps.Tile) {
+    EventBus.emit("obstacleFound", obstacle.x, obstacle.y)
+    this.checkForItemInteraction(obstacle)
+    this.checkForNPCInteraction(obstacle)
+  }
+
+  checkForItemInteraction(obstacle: Phaser.Tilemaps.Tile) {
+    const interaction = this.itemInteractions.find(
+      (item) => item.x === obstacle.x && item.y === obstacle.y,
     )
+
     if (interaction) {
-      EventBus.emit("newInteraction", interaction)
+      EventBus.emit("itemInteraction", interaction)
+    }
+  }
+
+  checkForNPCInteraction(obstacle: Phaser.Tilemaps.Tile) {
+    const npc = this.npcs.find(
+      (npc) => npc.location.x === obstacle.x && npc.location.y === obstacle.y,
+    )
+
+    if (npc) {
+      EventBus.emit("npcInteraction", npc)
     }
   }
 }

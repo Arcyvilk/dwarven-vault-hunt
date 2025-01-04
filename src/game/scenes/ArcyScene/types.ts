@@ -5,7 +5,7 @@ export type Action = {
   result?: string
 }
 
-export type Interaction = {
+export type ItemInteraction = {
   id: string
   x: number
   y: number
