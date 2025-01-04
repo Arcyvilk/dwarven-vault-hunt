@@ -8,7 +8,6 @@ export class House extends ArcyScene {
 
   preload() {
     this.customPreload("map_home", "map_home.json")
-    this.preloadLayerImages()
   }
 
   create() {
@@ -19,23 +18,6 @@ export class House extends ArcyScene {
 
   update(/**time, delta */) {
     // something
-  }
-
-  preloadLayerImages() {
-    this.load.image("wall_wooden", "df_tilesets/wall_wooden.png")
-    this.load.image(
-      "floor_stone_engraved_palette",
-      "df_tilesets/floor_stone_engraved_palette.png",
-    )
-    this.load.image("glass_floor", "df_tilesets/glass_floor.png")
-    this.load.image("wooden_floor", "df_tilesets/wooden_floor.png")
-    this.load.image("fortification_wood", "df_tilesets/fortification_wood.png")
-    this.load.image("building_icons", "df_tilesets/building_icons.png")
-    this.load.image("stockpile", "df_tilesets/stockpile.png")
-    this.load.image("item_tool", "df_tilesets/item_tool.png")
-    this.load.image("items3", "df_tilesets/items3.png")
-    this.load.image("instruments", "df_tilesets/instruments.png")
-    this.load.image("hidden_rock", "df_tilesets/hidden_rock.png")
   }
 
   loadLayers(map: Phaser.Tilemaps.Tilemap) {
