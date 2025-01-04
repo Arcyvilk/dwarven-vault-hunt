@@ -1,4 +1,4 @@
-import { ItemInteraction } from "../../ArcyScene/types"
+import { Action, ItemInteraction } from "../../ArcyScene/types"
 
 export const itemInteractions: ItemInteraction[] = [
   {
@@ -8,17 +8,21 @@ export const itemInteractions: ItemInteraction[] = [
     actions: [
       {
         id: "view",
-        description: "View the kufer",
-        type: "simple",
-        fn: () => {
+        type: "item_view",
+        key: "",
+        prompt: "View the kufer",
+        result: "",
+        fn: (action: Action) => {
           alert("you look at the kufer")
         },
       },
       {
         id: "open",
-        description: "Open the kufer",
-        type: "simple",
-        fn: () => {
+        key: "",
+        type: "item_loot",
+        prompt: "Open the kufer",
+        result: "",
+        fn: (action: Action) => {
           alert("you open the kufer")
         },
       },

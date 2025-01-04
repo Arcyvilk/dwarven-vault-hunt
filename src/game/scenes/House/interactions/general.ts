@@ -1,4 +1,4 @@
-import { ItemInteraction } from "../../ArcyScene/types"
+import { Action, ItemInteraction } from "../../ArcyScene/types"
 
 export const generalInteractions: ItemInteraction[] = [
   {
@@ -8,9 +8,11 @@ export const generalInteractions: ItemInteraction[] = [
     actions: [
       {
         id: "leave",
-        description: "Leave the home",
-        type: "simple",
-        fn: () => {
+        type: "other",
+        key: "",
+        prompt: "Leave the home",
+        result: "",
+        fn: (action: Action) => {
           alert("you leave the home")
         },
       },

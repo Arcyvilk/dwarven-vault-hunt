@@ -1,4 +1,4 @@
-import { NPC } from "../NPC"
+import { NPC } from "."
 
 const drillerData = {
   species: "Dwarf",

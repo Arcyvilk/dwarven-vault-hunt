@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { ItemInteraction } from "../../game/scenes/ArcyScene/types"
 import { Modal } from "../Modal"
-import { NPC } from "../../game/npcs/NPC"
+import { NPC } from "../../game/npcs"
 import { useKeyboardNavigation } from "../../hooks"
 
 type Props = {
@@ -30,7 +30,7 @@ export const InteractionDecisionModal = ({
             {actions.map((action) => (
               <StyledAction>
                 <span style={{ color: "#0da50d" }}>{action.key}</span>
-                <span>{action.description}</span>
+                <span>{action.prompt}</span>
               </StyledAction>
             ))}
           </Actions>

@@ -1,17 +1,16 @@
 import { useEffect } from "react"
 import { mapOptions } from "../utils"
+import { Action } from "../game/scenes/ArcyScene/types"
 
-export const useKeyboardNavigation = <T extends { fn: () => void }>(
-  rawActions: T[],
-) => {
-  const actions = mapOptions(rawActions)
+export const useKeyboardNavigation = (actions: Action[]) => {
+  const mappedActions = mapOptions(actions)
 
   useEffect(() => {
     const keyDownHandler = (e: globalThis.KeyboardEvent) => {
-      actions.forEach((a) => {
+      mappedActions.forEach((a: Action) => {
         if (e.key === a.key) {
           e.preventDefault()
-          a.fn()
+          a.fn(a)
         }
       })
     }
@@ -23,5 +22,5 @@ export const useKeyboardNavigation = <T extends { fn: () => void }>(
     }
   }, [])
 
-  return { actions }
+  return { actions: mappedActions }
 }
