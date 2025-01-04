@@ -5,7 +5,6 @@ type Props = PropsWithChildren & { isOpen: boolean; onClose: () => void }
 export const Modal = ({ children, isOpen, onClose }: Props) => {
   useEffect(() => {
     const keyDownHandler = (e: globalThis.KeyboardEvent) => {
-      console.log(e.key)
       if (isOpen && e.key === "Escape") {
         e.preventDefault()
         onClose()
