@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Interaction } from "../../game/scenes/ArcyScene/types"
 import { Modal } from "../Modal"
-import { mapOptions } from "../../utils"
+import { mapOptions, useKeyboardNavigation } from "../../utils"
 
 type Props = {
   interaction: Interaction
@@ -14,9 +14,11 @@ export const InteractionDecisionModal = ({
   onClose,
 }: Props) => {
   const actions = mapOptions(interaction.actions)
+  // useKeyboardNavigation()
 
+  if (!isOpen) return null
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen onClose={onClose}>
       <Content>
         <Header>
           <div>What do you want to do?</div>

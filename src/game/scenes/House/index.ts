@@ -110,10 +110,15 @@ export class House extends ArcyScene {
       0,
       0,
     )!
+    this.layers.npc = map.createLayer("npc", [tiles_building_icons!], 0, 0)!
 
     this.layers.layerWalls?.setCollisionByExclusion([-1])
 
-    this.collisionLayers = [this.layers.layerWalls, this.layers.layerFurniture]
+    this.collisionLayers = [
+      this.layers.layerWalls,
+      this.layers.layerFurniture,
+      this.layers.npc,
+    ]
     this.rayCollisionLayers = [this.layers.layerWalls]
   }
 }

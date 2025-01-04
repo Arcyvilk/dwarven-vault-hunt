@@ -1,8 +1,24 @@
-import { PropsWithChildren } from "react"
+import { PropsWithChildren, useEffect } from "react"
 import styled from "styled-components"
 
-type Props = PropsWithChildren & { isOpen: boolean }
-export const Modal = ({ children, isOpen }: Props) => {
+type Props = PropsWithChildren & { isOpen: boolean; onClose: () => void }
+export const Modal = ({ children, isOpen, onClose }: Props) => {
+  useEffect(() => {
+    const keyDownHandler = (e: globalThis.KeyboardEvent) => {
+      console.log(e.key)
+      if (isOpen && e.key === "Escape") {
+        e.preventDefault()
+        onClose()
+      }
+    }
+
+    document.addEventListener("keydown", keyDownHandler)
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler)
+    }
+  }, [])
+
   return <StyledDialog open={isOpen}>{children}</StyledDialog>
 }
 

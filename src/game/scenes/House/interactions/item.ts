@@ -1,6 +1,6 @@
-import { Interaction } from "../ArcyScene/types"
+import { Interaction } from "../../ArcyScene/types"
 
-export const interactions: Interaction[] = [
+export const itemInteractions: Interaction[] = [
   {
     id: "kufer",
     x: 31,
@@ -9,11 +9,13 @@ export const interactions: Interaction[] = [
       {
         id: "view",
         description: "View the kufer",
+        type: "simple",
         result: "This is a kufer.",
       },
       {
         id: "open",
         description: "Open the kufer",
+        type: "simple",
         result:
           "It is full of sheets, pillows, blankets and other similar items.",
       },
