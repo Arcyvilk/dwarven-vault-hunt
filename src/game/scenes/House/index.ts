@@ -1,3 +1,4 @@
+import { EventBus } from "../../events"
 import { Driller } from "../../npcs/Driller"
 import { ArcyScene } from "../ArcyScene"
 import { Exit } from "./interactions/general"
@@ -18,6 +19,7 @@ export class House extends ArcyScene {
     this.preLayerLoad("map_home", 1888, 736)
     this.loadLayers(this.map)
     this.postLayerLoad()
+    EventBus.emit("current-scene-ready", this)
   }
 
   update(/**time, delta */) {

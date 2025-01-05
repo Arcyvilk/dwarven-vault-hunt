@@ -16,7 +16,7 @@ export const Exit = new Item(
       prompt: "Leave the home",
       result: "",
       fn: () => {
-        EventBus.emit(EventEmit.CHANGE_SCENE, "Preloader")
+        EventBus.emit(EventEmit.CHANGE_SCENE, "GameOver")
       },
     },
   ],

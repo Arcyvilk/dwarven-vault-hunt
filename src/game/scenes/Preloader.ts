@@ -1,6 +1,6 @@
-import { Scene } from "phaser"
+import { ArcyScene } from "./ArcyScene"
 
-export class Preloader extends Scene {
+export class Preloader extends ArcyScene {
   constructor() {
     super("Preloader")
   }
@@ -32,10 +32,7 @@ export class Preloader extends Scene {
     //  For example, you can define global animations here, so we can use them in other scenes.
 
     //  Move to the House. You could also swap this for a Scene Transition, such as a camera fade.
-    this.scene.transition({
-      target: "House",
-      duration: 1000,
-    })
+    this.changeScene("House")
   }
 
   // Preload images that are used in the "House" scene

@@ -10,6 +10,7 @@ import {
   ItemDialog,
 } from "./components"
 import { NPCDialog } from "./components/NPCDialog"
+import { ArcyScene } from "./game/scenes/ArcyScene"
 
 const App = () => {
   //  References to the PhaserGame component (game and scene are exposed)
@@ -23,11 +24,10 @@ const App = () => {
   } = useEventTriggers()
 
   EventBus.on(EventEmit.CHANGE_SCENE, (newScene: string) => {
-    console.log(newScene)
-    phaserRef.current?.scene?.scene.transition({
-      target: newScene,
-      duration: 1000,
-    })
+    if (phaserRef.current?.scene) {
+      const scene = phaserRef.current.scene as ArcyScene
+      scene.changeScene(newScene)
+    }
   })
 
   return (

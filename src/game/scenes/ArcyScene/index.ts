@@ -30,7 +30,6 @@ export class ArcyScene extends Scene {
   fov: Phaser.GameObjects.Graphics
 
   // Control and view props
-  camera: Phaser.Cameras.Scene2D.Camera
   controls: Phaser.Cameras.Controls.FixedKeyControl
   cursors: Phaser.Types.Input.Keyboard.CursorKeys
 
@@ -39,6 +38,7 @@ export class ArcyScene extends Scene {
   }
 
   customPreload(tilemapName: string, tilemapPath: string) {
+    this.cameras.main.fadeIn(1000)
     this.load.setBaseURL("https://cdn.arcyvilk.com/dwarven_grail_hunters")
     this.load.tilemapTiledJSON(tilemapName, tilemapPath)
     this.load.image("player", "player.png")
@@ -267,5 +267,20 @@ export class ArcyScene extends Scene {
     )
     // If no npc interaction, the undefined is emit anyway
     EventBus.emit(EventEmit.NPC_INTERACTION, npc)
+  }
+
+  changeScene(newScene: string) {
+    this.cameras.main.fadeOut(1000)
+    this.cameras.main.once("camerafadeoutcomplete", () => {
+      this.scene.start(newScene)
+    })
+
+    // this.scene.transition({
+    //   target: newScene,
+    //   duration: 1000,
+    // })
+    // this.events.on("transitionout", () => {
+    //   this.cameras.main.fadeOut(500)
+    // })
   }
 }

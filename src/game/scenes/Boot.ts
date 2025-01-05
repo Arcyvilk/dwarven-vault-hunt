@@ -1,6 +1,6 @@
-import { Scene } from "phaser"
+import { ArcyScene } from "./ArcyScene"
 
-export class Boot extends Scene {
+export class Boot extends ArcyScene {
   constructor() {
     super("Boot")
   }
@@ -12,6 +12,6 @@ export class Boot extends Scene {
   }
 
   create() {
-    this.scene.start("Preloader")
+    this.changeScene("Preloader")
   }
 }
