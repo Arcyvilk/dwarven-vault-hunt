@@ -1,20 +1,16 @@
 import styled from "styled-components"
-import { ItemInteraction } from "../../game/scenes/ArcyScene/types"
 import { Modal } from "../Modal"
 import { NPC } from "../../game/npcs"
+import { Item } from "../../game/items"
 import { useKeyboardNavigation } from "../../hooks"
 
 type Props = {
-  interaction?: ItemInteraction
+  item?: Item
   npc?: NPC
   onClose: () => void
 }
-export const InteractionDecisionModal = ({
-  interaction,
-  npc,
-  onClose,
-}: Props) => {
-  const rawActions = interaction?.actions ?? npc?.actions ?? []
+export const InteractionDecisionModal = ({ item, npc, onClose }: Props) => {
+  const rawActions = item?.actions ?? npc?.actions ?? []
   const { actions } = useKeyboardNavigation(rawActions)
 
   return (

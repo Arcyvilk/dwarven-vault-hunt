@@ -1,3 +1,5 @@
 export * from "./DebugSidebar"
 export * from "./InteractionDecisionModal"
+export * from "./ItemDialog"
 export * from "./Modal"
+export * from "./NPCDialog"

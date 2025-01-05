@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { EventBus } from "../../game/EventBus"
+import { EventBus, EventEmit } from "../../game/events"
 import { useQueryParams } from "../../hooks"
 
 export const DebugSidebar = () => {
@@ -7,7 +7,7 @@ export const DebugSidebar = () => {
   const debug = useQueryParams("debug")
   const isDebug = debug === "true"
 
-  EventBus.on("obstacleFound", (x: number, y: number) => {
+  EventBus.on(EventEmit.OBSTACLE_FOUND, (x: number, y: number) => {
     setItemPosition({ x, y })
   })
 

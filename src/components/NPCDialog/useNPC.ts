@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { NPC } from "../../game/npcs"
-import { EventBus } from "../../game/EventBus"
+import { EventBus, EventEmit } from "../../game/events"
 
 export const useNPC = () => {
   const [activeNPC, setActiveNPC] = useState<NPC>()
@@ -8,17 +8,17 @@ export const useNPC = () => {
   const [isNPCTalkOpen, setIsNPCTalkOpen] = useState(false)
   const [isNPCAttackOpen, setIsNPCAttackOpen] = useState(false)
 
-  EventBus.on("npc_view", (npc: NPC) => {
+  EventBus.on(EventEmit.NPC_VIEW, (npc: NPC) => {
     setIsNPCViewOpen(true)
     setActiveNPC(npc)
   })
 
-  EventBus.on("npc_talk", (npc: NPC) => {
+  EventBus.on(EventEmit.NPC_TALK, (npc: NPC) => {
     setIsNPCTalkOpen(true)
     setActiveNPC(npc)
   })
 
-  EventBus.on("npc_attack", (npc: NPC) => {
+  EventBus.on(EventEmit.NPC_ATTACK, (npc: NPC) => {
     setIsNPCAttackOpen(true)
     setActiveNPC(npc)
   })

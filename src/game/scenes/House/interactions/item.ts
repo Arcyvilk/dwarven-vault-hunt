@@ -1,33 +1,25 @@
-import { Action, ItemInteraction } from "../../ArcyScene/types"
+import { Action } from "../../ArcyScene/types"
+import { Item } from "../../../items"
 
-export const itemInteractions: ItemInteraction[] = [
+export const Kufer = new Item(
+  "kufer",
+  { x: 31, y: 6 },
   {
-    id: "kufer",
-    x: 31,
-    y: 6,
-    actions: [
-      {
-        id: "view",
-        type: "item_view",
-        key: "",
-        prompt: "View the kufer",
-        result: "",
-        fn: (action: Action) => {
-          alert("you look at the kufer")
-        },
-      },
-      {
-        id: "open",
-        key: "",
-        type: "item_loot",
-        prompt: "Open the kufer",
-        result: "",
-        fn: (action: Action) => {
-          alert("you open the kufer")
-        },
-      },
-    ],
-    name: "Kufer",
+    name: "wooden kufer",
     description: "It's a kufer.",
+    quality: "fine",
+    wear: 10,
   },
-]
+  [
+    {
+      id: "open",
+      key: "",
+      type: "item_loot",
+      prompt: `Open the %%%`,
+      result: "",
+      fn: (action: Action) => {
+        alert("you open the kufer")
+      },
+    },
+  ],
+)

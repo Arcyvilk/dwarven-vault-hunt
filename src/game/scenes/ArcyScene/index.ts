@@ -1,8 +1,8 @@
 import PhaserRaycaster from "phaser-raycaster"
 import { Scene } from "phaser"
-import { EventBus } from "../../EventBus"
-import { ItemInteraction } from "./types"
-import { NPC } from "../../npcs/NPC"
+import { EventBus, EventEmit } from "../../events"
+import { NPC } from "../../npcs"
+import { Item } from "../../items"
 
 export class ArcyScene extends Scene {
   // Basic map related props
@@ -11,8 +11,8 @@ export class ArcyScene extends Scene {
   layers: Record<string, Phaser.Tilemaps.TilemapLayer> = {}
   player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody
 
-  // Interactions with items on the map
-  itemInteractions: ItemInteraction[] = []
+  // Interactions with entities on the map
+  items: Item[] = []
   npcs: NPC[] = []
 
   // Body and light collission props
@@ -34,9 +34,8 @@ export class ArcyScene extends Scene {
   controls: Phaser.Cameras.Controls.FixedKeyControl
   cursors: Phaser.Types.Input.Keyboard.CursorKeys
 
-  constructor(sceneName: string, itemInteractions: ItemInteraction[]) {
+  constructor(sceneName: string) {
     super(sceneName)
-    this.itemInteractions = itemInteractions
   }
 
   customPreload(tilemapName: string, tilemapPath: string) {
@@ -248,17 +247,18 @@ export class ArcyScene extends Scene {
   }
 
   checkForInteraction(obstacle: Phaser.Tilemaps.Tile) {
-    EventBus.emit("obstacleFound", obstacle.x, obstacle.y)
+    EventBus.emit(EventEmit.OBSTACLE_FOUND, obstacle.x, obstacle.y)
     this.checkForItemInteraction(obstacle)
     this.checkForNPCInteraction(obstacle)
   }
 
   checkForItemInteraction(obstacle: Phaser.Tilemaps.Tile) {
-    const interaction = this.itemInteractions.find(
-      (item) => item.x === obstacle.x && item.y === obstacle.y,
+    const interaction = this.items.find(
+      (item) =>
+        item.location.x === obstacle.x && item.location.y === obstacle.y,
     )
     // If no item interaction, the undefined is emit anyway
-    EventBus.emit("itemInteraction", interaction)
+    EventBus.emit(EventEmit.ITEM_INTERACTION, interaction)
   }
 
   checkForNPCInteraction(obstacle: Phaser.Tilemaps.Tile) {
@@ -266,6 +266,6 @@ export class ArcyScene extends Scene {
       (npc) => npc.location.x === obstacle.x && npc.location.y === obstacle.y,
     )
     // If no npc interaction, the undefined is emit anyway
-    EventBus.emit("npcInteraction", npc)
+    EventBus.emit(EventEmit.NPC_INTERACTION, npc)
   }
 }

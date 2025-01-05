@@ -1,9 +1,14 @@
 import { useRef, useState } from "react"
 import { IRefPhaserGame, PhaserGame } from "./game/PhaserGame"
-import { EventBus } from "./game/EventBus"
-import { ItemInteraction } from "./game/scenes/ArcyScene/types"
-import { InteractionDecisionModal, DebugSidebar } from "./components"
+import { EventBus, EventEmit } from "./game/events"
 import { NPC } from "./game/npcs"
+import { Item } from "./game/items"
+
+import {
+  InteractionDecisionModal,
+  DebugSidebar,
+  ItemDialog,
+} from "./components"
 import { NPCDialog } from "./components/NPCDialog"
 
 const App = () => {
@@ -17,21 +22,27 @@ const App = () => {
     onClose,
   } = useEventTriggers()
 
+  EventBus.on(EventEmit.CHANGE_SCENE, (newScene: string) => {
+    console.log(newScene)
+    phaserRef.current?.scene?.scene.transition({
+      target: newScene,
+      duration: 1000,
+    })
+  })
+
   return (
     <div id="app">
       <PhaserGame ref={phaserRef} />
       <DebugSidebar />
       {isInteractionDecisionVisible && itemInteraction && (
-        <InteractionDecisionModal
-          interaction={itemInteraction}
-          onClose={onClose}
-        />
+        <InteractionDecisionModal item={itemInteraction} onClose={onClose} />
       )}
       {isInteractionDecisionVisible && npcInteraction && (
         <InteractionDecisionModal npc={npcInteraction} onClose={onClose} />
       )}
 
       <NPCDialog />
+      <ItemDialog />
     </div>
   )
 }
@@ -42,15 +53,15 @@ const useEventTriggers = () => {
   const [isInteractionDecisionVisible, setIsInteractionDecisionVisible] =
     useState(false)
 
-  const [itemInteraction, setItemInteraction] = useState<ItemInteraction>()
+  const [itemInteraction, setItemInteraction] = useState<Item>()
   const [npcInteraction, setNPCInteraction] = useState<NPC>()
 
-  EventBus.on("itemInteraction", (interaction: ItemInteraction) => {
+  EventBus.on(EventEmit.ITEM_INTERACTION, (interaction: Item) => {
     setItemInteraction(interaction)
     setIsInteractionDecisionVisible(true)
   })
 
-  EventBus.on("npcInteraction", (interaction: NPC) => {
+  EventBus.on(EventEmit.NPC_INTERACTION, (interaction: NPC) => {
     setNPCInteraction(interaction)
     setIsInteractionDecisionVisible(true)
   })

@@ -1,10 +1,12 @@
 import { Driller } from "../../npcs/Driller"
 import { ArcyScene } from "../ArcyScene"
-import { interactions } from "./interactions"
+import { Exit } from "./interactions/general"
+import { Kufer } from "./interactions/item"
 
 export class House extends ArcyScene {
   constructor() {
-    super("House", interactions)
+    super("House")
+    this.items = [Exit, Kufer]
     this.npcs = [Driller]
   }
 

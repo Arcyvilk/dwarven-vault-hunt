@@ -15,21 +15,32 @@ type ActionType =
   | "item_loot"
   | "other"
 
-export type ItemInteraction = {
-  id: string
-  x: number
-  y: number
-  actions: Action[]
-  name: string
-  description: string
-}
+export type Location = { x: number; y: number }
 
-// NPC types
+/**
+ * NPC TYPES
+ */
 export type NPCData = {
   name: string
+  description?: string
   surname?: string
   species?: string
-  description?: string
 }
 
-export type NPCLocation = { x: number; y: number }
+/**
+ * ITEM TYPES
+ */
+export type ItemData = {
+  name: string
+  description: string
+  quality?: ItemQuality
+  wear?: number
+  isDecorated?: boolean
+}
+
+export type ItemQuality =
+  | "well"
+  | "fine"
+  | "superior"
+  | "exceptional"
+  | "masterful"
