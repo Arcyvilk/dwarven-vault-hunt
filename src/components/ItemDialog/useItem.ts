@@ -8,15 +8,11 @@ export const useItem = () => {
   const [activeAction, setActiveAction] = useState<Action<Item>>()
 
   EventBus.on(EventEmit.ITEM_VIEW, (item: Item, action: Action<Item>) => {
-    console.log(item)
-    console.log(action)
     setActiveAction(action)
     setActiveItem(item)
   })
 
   EventBus.on(EventEmit.ITEM_OTHER, (item: Item, action: Action<Item>) => {
-    console.log(item)
-    console.log(action)
     setActiveAction(action)
     setActiveItem(item)
   })

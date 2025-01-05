@@ -25,6 +25,7 @@ export class Preloader extends ArcyScene {
   preload() {
     this.load.setBaseURL("https://cdn.arcyvilk.com/dwarven_grail_hunters")
     this.preloadLayerImagesHouse()
+    this.preloadLayerImagesFornebu()
   }
 
   create() {
@@ -36,7 +37,7 @@ export class Preloader extends ArcyScene {
     this.changeScene("House")
   }
 
-  // Preload images that are used in the "House" scene
+  // HOUSE SCENE preload
   preloadLayerImagesHouse() {
     this.load.image("wall_wooden", "df_tilesets/wall_wooden.png")
     this.load.image(
@@ -52,5 +53,15 @@ export class Preloader extends ArcyScene {
     this.load.image("items3", "df_tilesets/items3.png")
     this.load.image("instruments", "df_tilesets/instruments.png")
     this.load.image("hidden_rock", "df_tilesets/hidden_rock.png")
+  }
+
+  // FORNEBU SCENE preload
+  preloadLayerImagesFornebu() {
+    this.load.image("building_icons", "df_tilesets/building_icons.png")
+    this.load.image("floors", "df_tilesets/floors.png")
+    this.load.image("grass_flowers", "df_tilesets/grass_flowers.png")
+    this.load.image("liquids", "df_tilesets/liquids.png")
+    this.load.image("tree_maple", "df_tilesets/tree_maple.png")
+    this.load.image("tree_saplings", "df_tilesets/tree_saplings.png")
   }
 }

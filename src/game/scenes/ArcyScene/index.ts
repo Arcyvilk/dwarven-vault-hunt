@@ -4,13 +4,17 @@ import { EventBus, EventEmit } from "../../events"
 import { NPC } from "../../npcs"
 import { Item } from "../../items"
 import { useQueryParams } from "../../../hooks"
+import { Location } from "./types"
 
 export class ArcyScene extends Scene {
   // Basic map related props
   tileSize: number = 64
   map: Phaser.Tilemaps.Tilemap
   layers: Record<string, Phaser.Tilemaps.TilemapLayer> = {}
+
+  // Player
   player: Phaser.Types.Physics.Arcade.ImageWithDynamicBody
+  playerPosition: Location
 
   // Interactions with entities on the map
   items: Item[] = []
@@ -38,14 +42,23 @@ export class ArcyScene extends Scene {
     super(sceneName)
   }
 
+  init(playerPosition?: Location) {
+    if (playerPosition) this.playerPosition = playerPosition
+  }
+
+  customPreload(tilemapName: string, tilemapPath: string) {
+    this.scene.manager.dump()
+    this.load.setBaseURL("https://cdn.arcyvilk.com/dwarven_grail_hunters")
+    this.load.tilemapTiledJSON(tilemapName, tilemapPath)
+    this.load.image("player", "player.png")
+  }
+
   customCreate() {
     this.cameras.main.fadeIn(1000)
   }
 
-  customPreload(tilemapName: string, tilemapPath: string) {
-    this.load.setBaseURL("https://cdn.arcyvilk.com/dwarven_grail_hunters")
-    this.load.tilemapTiledJSON(tilemapName, tilemapPath)
-    this.load.image("player", "player.png")
+  setSceneReady() {
+    EventBus.emit("current-scene-ready", this)
   }
 
   preLayerLoad(
@@ -100,7 +113,15 @@ export class ArcyScene extends Scene {
   }
 
   setPlayer(playerStartX: number, playerStartY: number) {
-    this.player = this.physics.add.image(playerStartX, playerStartY, "player")
+    this.playerPosition = {
+      x: this.playerPosition.x ?? playerStartX,
+      y: this.playerPosition.y ?? playerStartY,
+    }
+    this.player = this.physics.add.image(
+      this.playerPosition.x,
+      this.playerPosition.y,
+      "player",
+    )
     this.player.setCollideWorldBounds(true)
     this.player.setDepth(5)
 
@@ -145,10 +166,6 @@ export class ArcyScene extends Scene {
     //set depths
     this.fov.setDepth(1)
     this.graphics.setDepth(3)
-
-    this.rayCollisionLayers.forEach((rayCollisionLayer) => {
-      rayCollisionLayer.setDepth(1)
-    })
   }
 
   setRaycasting() {
@@ -244,6 +261,7 @@ export class ArcyScene extends Scene {
     // If yes, the tile is impassable and we have to block player from moving through it
     const obstacle = collisionTiles.find((tile) => tile.index !== -1)
     if (obstacle) {
+      console.log({ x: this.player.x, y: this.player.y })
       this.checkForInteraction(obstacle)
       return true
     }
@@ -273,16 +291,16 @@ export class ArcyScene extends Scene {
     EventBus.emit(EventEmit.NPC_INTERACTION, npc)
   }
 
-  changeScene(newScene: string) {
+  changeScene(newScene: string, playerPosition?: { x: number; y: number }) {
     const debug = useQueryParams("debug")
     const isDebug = debug === "true"
 
     if (isDebug) {
-      this.scene.start(newScene)
+      this.scene.start(newScene, playerPosition)
     } else {
       this.cameras.main.fadeOut(1000)
       this.cameras.main.once("camerafadeoutcomplete", () => {
-        this.scene.start(newScene)
+        this.scene.start(newScene, playerPosition)
       })
     }
   }

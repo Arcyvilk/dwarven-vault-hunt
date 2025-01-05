@@ -3,13 +3,33 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map.tmx",
+    "activeFile": "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Fornebu/map_fornebu.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "": {
+            "scaleInDock": 1.5
+        },
+        "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Fornebu/map_fornebu.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 1800,
+                "y": 1412
+            }
+        },
+        "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Fornebu/map_fornebu.tmx#floors": {
+            "scaleInDock": 4
+        },
+        "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Fornebu/map_fornebu.tmx#grass_flowers": {
             "scaleInDock": 1
+        },
+        "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Fornebu/map_fornebu.tmx#liquids": {
+            "scaleInDock": 1
+        },
+        "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Fornebu/map_fornebu.tmx#tree_saplings": {
+            "scaleInDock": 2
         },
         "building_icons.tsx": {
             "scaleInDock": 2,
@@ -119,15 +139,16 @@
     },
     "last.exportedFilePath": "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/House",
     "last.imagePath": "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/assets/df_tilesets",
-    "map.height": 42,
+    "map.height": 120,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
-    "map.width": 64,
+    "map.width": 160,
     "openFiles": [
-        "map.tmx"
+        "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Fornebu/map_fornebu.tmx"
     ],
     "project": "home.tiled-project",
     "recentFiles": [
+        "X:/ARCYVUM/GitHub/dwarven-vault-hunt/src/game/scenes/Fornebu/map_fornebu.tmx",
         "map.tmx",
         "items3.tsx",
         "item_bookcase.tsx",
@@ -138,8 +159,7 @@
         "item_chair.tsx",
         "item_table.tsx",
         "wall_wooden.tsx",
-        "floors.tsx",
-        "floor_stone_engraved_palette.tsx"
+        "floors.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx"
