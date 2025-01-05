@@ -2,7 +2,10 @@ import { useEffect } from "react"
 import { mapOptions } from "../utils"
 import { Action } from "../game/scenes/ArcyScene/types"
 
-export const useKeyboardNavigation = (actions: Action[]) => {
+export const useKeyboardNavigation = (
+  actions: Action[],
+  onClose: () => void,
+) => {
   const mappedActions = mapOptions(actions)
 
   useEffect(() => {
@@ -11,6 +14,7 @@ export const useKeyboardNavigation = (actions: Action[]) => {
         if (e.key === a.key) {
           e.preventDefault()
           a.fn(a)
+          onClose()
         }
       })
     }

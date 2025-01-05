@@ -11,7 +11,7 @@ type Props = {
 }
 export const InteractionDecisionModal = ({ item, npc, onClose }: Props) => {
   const rawActions = item?.actions ?? npc?.actions ?? []
-  const { actions } = useKeyboardNavigation(rawActions)
+  const { actions } = useKeyboardNavigation(rawActions, onClose)
 
   return (
     <Modal isOpen onClose={onClose}>
