@@ -1,39 +1,35 @@
 import { useState } from "react"
 import { NPC } from "../../game/npcs"
 import { EventBus, EventEmit } from "../../game/events"
+import { Action } from "../../game/scenes/ArcyScene/types"
 
 export const useNPC = () => {
   const [activeNPC, setActiveNPC] = useState<NPC>()
-  const [isNPCViewOpen, setIsNPCViewOpen] = useState(false)
-  const [isNPCTalkOpen, setIsNPCTalkOpen] = useState(false)
-  const [isNPCAttackOpen, setIsNPCAttackOpen] = useState(false)
+  const [activeAction, setActiveAction] = useState<Action>()
 
-  EventBus.on(EventEmit.NPC_VIEW, (npc: NPC) => {
-    setIsNPCViewOpen(true)
+  EventBus.on(EventEmit.NPC_VIEW, (npc: NPC, action: Action) => {
+    setActiveAction(action)
     setActiveNPC(npc)
   })
 
-  EventBus.on(EventEmit.NPC_TALK, (npc: NPC) => {
-    setIsNPCTalkOpen(true)
+  EventBus.on(EventEmit.NPC_TALK, (npc: NPC, action: Action) => {
+    setActiveAction(action)
     setActiveNPC(npc)
   })
 
-  EventBus.on(EventEmit.NPC_ATTACK, (npc: NPC) => {
-    setIsNPCAttackOpen(true)
+  EventBus.on(EventEmit.NPC_ATTACK, (npc: NPC, action: Action) => {
+    setActiveAction(action)
     setActiveNPC(npc)
   })
 
-  const onCloseAttack = () => setIsNPCAttackOpen(false)
-  const onCloseTalk = () => setIsNPCTalkOpen(false)
-  const onCloseView = () => setIsNPCViewOpen(false)
+  const onClose = () => {
+    setActiveAction(undefined)
+    setActiveNPC(undefined)
+  }
 
   return {
     activeNPC,
-    isNPCAttackOpen,
-    onCloseAttack,
-    isNPCTalkOpen,
-    onCloseTalk,
-    isNPCViewOpen,
-    onCloseView,
+    activeAction,
+    onClose,
   }
 }

@@ -4,55 +4,49 @@ import { Modal } from "../Modal"
 import { useNPC } from "./useNPC"
 
 export const NPCDialog = () => {
-  const {
-    activeNPC,
-    isNPCAttackOpen,
-    isNPCTalkOpen,
-    isNPCViewOpen,
-    onCloseAttack,
-    onCloseTalk,
-    onCloseView,
-  } = useNPC()
+  const { activeNPC, activeAction, onClose } = useNPC()
 
   if (!activeNPC) return
-  if (isNPCAttackOpen)
-    return <NPCAttackModal npc={activeNPC} onClose={onCloseAttack} />
-  if (isNPCTalkOpen)
-    return <NPCTalkModal npc={activeNPC} onClose={onCloseTalk} />
-  if (isNPCViewOpen)
-    return <NPCViewModal npc={activeNPC} onClose={onCloseView} />
+  if (activeAction?.type === "npc_attack")
+    return (
+      <NPCAttackModal npc={activeNPC} action={activeAction} onClose={onClose} />
+    )
+  if (activeAction?.type === "npc_talk")
+    return (
+      <NPCTalkModal npc={activeNPC} action={activeAction} onClose={onClose} />
+    )
+  if (activeAction?.type === "npc_view")
+    return (
+      <NPCViewModal npc={activeNPC} action={activeAction} onClose={onClose} />
+    )
 }
 
 type NPCActionProps = {
   npc: NPC
+  action: Action
   onClose: () => void
 }
 
-const NPCAttackModal = ({ npc, onClose }: NPCActionProps) => {
-  const result = npc.actions.find(
-    (a: Action) => a.type === "npc_attack",
-  )?.result
+const NPCAttackModal = ({ action, onClose }: NPCActionProps) => {
   return (
     <Modal isOpen onClose={onClose}>
-      {result}
+      {action.result}
     </Modal>
   )
 }
 
-const NPCTalkModal = ({ npc, onClose }: NPCActionProps) => {
-  const result = npc.actions.find((a: Action) => a.type === "npc_talk")?.result
+const NPCTalkModal = ({ action, onClose }: NPCActionProps) => {
   return (
     <Modal isOpen onClose={onClose}>
-      {result}
+      {action.result}
     </Modal>
   )
 }
 
-const NPCViewModal = ({ npc, onClose }: NPCActionProps) => {
-  const result = npc.actions.find((a: Action) => a.type === "npc_view")?.result
+const NPCViewModal = ({ action, onClose }: NPCActionProps) => {
   return (
     <Modal isOpen onClose={onClose}>
-      {result}
+      {action.result}
     </Modal>
   )
 }

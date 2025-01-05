@@ -1,4 +1,6 @@
+import { EventBus, EventEmit } from "../../../events"
 import { Item } from "../../../items"
+import { Action } from "../../ArcyScene/types"
 
 export const Kufer = new Item(
   "kufer",
@@ -16,11 +18,11 @@ export const Kufer = new Item(
     {
       id: "open",
       key: "",
-      type: "item_loot",
+      type: "item_other",
       prompt: `Open the %%%`,
       result: "",
-      fn: () => {
-        alert("You open the kufer")
+      fn: (action: Action) => {
+        EventBus.emit(EventEmit.ITEM_OTHER, this, action)
       },
     },
   ],

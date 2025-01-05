@@ -5,12 +5,20 @@ import { Modal } from "../Modal"
 import { useItem } from "./useItem"
 
 export const ItemDialog = () => {
-  const { activeItem, isItemViewOpen, onCloseView } = useItem()
+  const {
+    activeItem,
+    isItemViewOpen,
+    isItemOtherOpen,
+    onCloseView,
+    onCloseOther,
+  } = useItem()
 
   if (!activeItem) return
 
   if (isItemViewOpen)
     return <ItemViewModal item={activeItem} onClose={onCloseView} />
+  if (isItemOtherOpen)
+    return <ItemOtherModal item={activeItem} onClose={onCloseOther} />
 }
 
 type ItemActionProps = {
@@ -19,10 +27,6 @@ type ItemActionProps = {
 }
 
 const ItemViewModal = ({ item, onClose }: ItemActionProps) => {
-  const result = item.actions.find(
-    (a: Action) => a.type === "item_view",
-  )?.result
-
   return (
     <Modal isOpen onClose={onClose}>
       <Content>
@@ -44,6 +48,18 @@ const ItemViewModal = ({ item, onClose }: ItemActionProps) => {
           )}
         </Description>
       </Content>
+    </Modal>
+  )
+}
+
+const ItemOtherModal = ({ item, onClose }: ItemActionProps) => {
+  const result = item.actions.find(
+    (a: Action) => a.type === "item_other",
+  )?.result
+
+  return (
+    <Modal isOpen onClose={onClose}>
+      {result}
     </Modal>
   )
 }

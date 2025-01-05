@@ -11,8 +11,9 @@ type ActionType =
   | "npc_view"
   | "npc_talk"
   | "npc_attack"
+  | "npc_other"
   | "item_view"
-  | "item_loot"
+  | "item_other"
   | "other"
 
 export type Location = { x: number; y: number }
