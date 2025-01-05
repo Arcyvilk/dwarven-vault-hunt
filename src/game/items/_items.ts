@@ -1,3 +1,4 @@
+import { chooseRandom } from "../../utils"
 import { EventBus, EventEmit } from "../events"
 import { Action, ItemData, Location } from "../scenes/ArcyScene/types"
 
@@ -31,7 +32,7 @@ export class Item {
         type: "item_view",
         key: "",
         prompt: `View the ${this.data.name}`,
-        result: `You admire the ${this.data.name}!`,
+        result: this.getRandomResult(resultsView),
         fn: (action: Action) => {
           EventBus.emit(EventEmit.ITEM_VIEW, this, action)
         },
@@ -85,4 +86,10 @@ export class Item {
       return
     }
   }
+
+  getRandomResult(answers: string[]) {
+    return chooseRandom(answers).replace("%name%", this.data.name ?? "")
+  }
 }
+
+const resultsView = [`You admire the %name%!`]
