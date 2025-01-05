@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { IRefPhaserGame, PhaserGame } from "./game/PhaserGame"
 import { EventBus, EventEmit } from "./game/events"
 import { NPC } from "./game/npcs"
@@ -11,6 +11,7 @@ import {
 } from "./components"
 import { NPCDialog } from "./components/NPCDialog"
 import { ArcyScene } from "./game/scenes/ArcyScene"
+import { Location } from "./game/scenes/ArcyScene/types"
 
 const App = () => {
   //  References to the PhaserGame component (game and scene are exposed)
@@ -23,12 +24,20 @@ const App = () => {
     onClose,
   } = useEventTriggers()
 
-  EventBus.on(EventEmit.CHANGE_SCENE, (newScene: string) => {
-    if (phaserRef.current?.scene) {
-      const scene = phaserRef.current.scene as ArcyScene
-      scene.changeScene(newScene)
+  useEffect(() => {
+    const handleSceneChange = (newScene: string, playerPosition?: Location) => {
+      if (phaserRef.current?.scene) {
+        const scene = phaserRef.current.scene as ArcyScene
+        scene.changeScene(newScene, playerPosition)
+      }
     }
-  })
+
+    EventBus.on(EventEmit.CHANGE_SCENE, handleSceneChange)
+
+    return () => {
+      EventBus.off(EventEmit.CHANGE_SCENE, handleSceneChange)
+    }
+  }, [])
 
   return (
     <div id="app">
