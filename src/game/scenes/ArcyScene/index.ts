@@ -3,6 +3,7 @@ import { Scene } from "phaser"
 import { EventBus, EventEmit } from "../../events"
 import { NPC } from "../../npcs"
 import { Item } from "../../items"
+import { useQueryParams } from "../../../hooks"
 
 export class ArcyScene extends Scene {
   // Basic map related props
@@ -273,17 +274,16 @@ export class ArcyScene extends Scene {
   }
 
   changeScene(newScene: string) {
-    this.cameras.main.fadeOut(1000)
-    this.cameras.main.once("camerafadeoutcomplete", () => {
-      this.scene.start(newScene)
-    })
+    const debug = useQueryParams("debug")
+    const isDebug = debug === "true"
 
-    // this.scene.transition({
-    //   target: newScene,
-    //   duration: 1000,
-    // })
-    // this.events.on("transitionout", () => {
-    //   this.cameras.main.fadeOut(500)
-    // })
+    if (isDebug) {
+      this.scene.start(newScene)
+    } else {
+      this.cameras.main.fadeOut(1000)
+      this.cameras.main.once("camerafadeoutcomplete", () => {
+        this.scene.start(newScene)
+      })
+    }
   }
 }
