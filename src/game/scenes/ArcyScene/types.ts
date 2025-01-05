@@ -32,10 +32,12 @@ export type NPCData = {
  */
 export type ItemData = {
   name: string
+  rawName: string
   description: string
+  weight: number
   quality?: ItemQuality
   wear?: number
-  isDecorated?: boolean
+  decoration?: string
 }
 
 export type ItemQuality =

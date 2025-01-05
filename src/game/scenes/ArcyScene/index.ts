@@ -37,8 +37,11 @@ export class ArcyScene extends Scene {
     super(sceneName)
   }
 
-  customPreload(tilemapName: string, tilemapPath: string) {
+  customCreate() {
     this.cameras.main.fadeIn(1000)
+  }
+
+  customPreload(tilemapName: string, tilemapPath: string) {
     this.load.setBaseURL("https://cdn.arcyvilk.com/dwarven_grail_hunters")
     this.load.tilemapTiledJSON(tilemapName, tilemapPath)
     this.load.image("player", "player.png")

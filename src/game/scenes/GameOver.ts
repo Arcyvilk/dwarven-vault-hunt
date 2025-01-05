@@ -11,6 +11,7 @@ export class GameOver extends ArcyScene {
   }
 
   create() {
+    this.customCreate()
     this.camera = this.cameras.main
     this.camera.setBackgroundColor(0xff0000)
 
@@ -30,9 +31,5 @@ export class GameOver extends ArcyScene {
       .setDepth(100)
 
     EventBus.emit("current-scene-ready", this)
-  }
-
-  changeScene() {
-    this.scene.start("House")
   }
 }

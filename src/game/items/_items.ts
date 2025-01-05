@@ -41,13 +41,14 @@ export class Item {
   }
 
   setItemModifiers() {
+    this.data.name = this.data.rawName
     this.setItemDecoration()
     this.setItemWear()
     this.setItemQuality()
   }
 
   setItemDecoration() {
-    if (this.data.isDecorated) {
+    if (this.data.decoration) {
       this.data.name = `«${this.data.name}»`
     }
   }

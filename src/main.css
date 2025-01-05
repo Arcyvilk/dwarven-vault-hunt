@@ -10,4 +10,10 @@ html * {
     font-size: 18px;
     letter-spacing: 0.2px;
     user-select: none;
+    box-sizing: border-box;
+}
+
+img {
+    background-color: #49384A;
+    image-rendering: pixelated;
 }

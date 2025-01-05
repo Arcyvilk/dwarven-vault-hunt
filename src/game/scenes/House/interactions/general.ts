@@ -5,8 +5,10 @@ export const Exit = new Item(
   "exit",
   { x: 37, y: 2 },
   {
-    name: "exit door",
+    name: "",
+    rawName: "exit door",
     description: "It's a door.",
+    weight: 100,
   },
   [
     {

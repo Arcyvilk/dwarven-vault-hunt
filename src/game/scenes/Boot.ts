@@ -12,6 +12,7 @@ export class Boot extends ArcyScene {
   }
 
   create() {
+    this.customCreate()
     this.changeScene("Preloader")
   }
 }

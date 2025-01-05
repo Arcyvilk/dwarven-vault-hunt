@@ -16,6 +16,7 @@ export class House extends ArcyScene {
   }
 
   create() {
+    this.customCreate()
     this.preLayerLoad("map_home", 1888, 736)
     this.loadLayers(this.map)
     this.postLayerLoad()
