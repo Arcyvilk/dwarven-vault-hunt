@@ -1,30 +1,34 @@
 import { useState } from "react"
 import { Item } from "../../game/items"
 import { EventBus, EventEmit } from "../../game/events"
+import { Action } from "../../game/scenes/ArcyScene/types"
 
 export const useItem = () => {
   const [activeItem, setActiveItem] = useState<Item>()
-  const [isItemViewOpen, setIsItemViewOpen] = useState(false)
-  const [isItemOtherOpen, setIsItemOtherOpen] = useState(false)
+  const [activeAction, setActiveAction] = useState<Action<Item>>()
 
-  EventBus.on(EventEmit.ITEM_VIEW, (item: Item) => {
-    setIsItemViewOpen(true)
+  EventBus.on(EventEmit.ITEM_VIEW, (item: Item, action: Action<Item>) => {
+    console.log(item)
+    console.log(action)
+    setActiveAction(action)
     setActiveItem(item)
   })
 
-  EventBus.on(EventEmit.ITEM_OTHER, (item: Item) => {
-    setIsItemOtherOpen(true)
+  EventBus.on(EventEmit.ITEM_OTHER, (item: Item, action: Action<Item>) => {
+    console.log(item)
+    console.log(action)
+    setActiveAction(action)
     setActiveItem(item)
   })
 
-  const onCloseView = () => setIsItemViewOpen(false)
-  const onCloseOther = () => setIsItemOtherOpen(false)
+  const onClose = () => {
+    setActiveAction(undefined)
+    setActiveItem(undefined)
+  }
 
   return {
     activeItem,
-    isItemViewOpen,
-    isItemOtherOpen,
-    onCloseView,
-    onCloseOther,
+    activeAction,
+    onClose,
   }
 }

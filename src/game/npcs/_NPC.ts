@@ -6,13 +6,13 @@ export class NPC {
   public id: string
   public data: NPCData
   public location: Location
-  public actions: Action[]
+  public actions: Action<NPC>[]
 
   constructor(
     id: string,
     location: Location,
     data: NPCData,
-    actions: Action[],
+    actions: Action<NPC>[],
   ) {
     this.id = id
     this.data = data
@@ -27,8 +27,8 @@ export class NPC {
         key: "",
         prompt: `Start new conversation with the ${this.data.species} ${this.data.name} ${this.data.surname}`,
         result: this.getRandomResult(resultsTalk),
-        fn: (action: Action) => {
-          EventBus.emit(EventEmit.NPC_TALK, this, action)
+        fn: (action: Action<NPC>, entity: NPC) => {
+          EventBus.emit(EventEmit.NPC_TALK, entity, action)
         },
       },
       {
@@ -37,8 +37,8 @@ export class NPC {
         key: "",
         prompt: `View the ${this.data.species} ${this.data.name} ${this.data.surname}`,
         result: this.getRandomResult(resultsView),
-        fn: (action: Action) => {
-          EventBus.emit(EventEmit.NPC_VIEW, this, action)
+        fn: (action: Action<NPC>, entity: NPC) => {
+          EventBus.emit(EventEmit.NPC_VIEW, entity, action)
         },
       },
       {
@@ -47,8 +47,8 @@ export class NPC {
         key: "",
         prompt: `Attack the ${this.data.species} ${this.data.name} ${this.data.surname}`,
         result: this.getRandomResult(resultsAttack),
-        fn: (action: Action) => {
-          EventBus.emit(EventEmit.NPC_ATTACK, this, action)
+        fn: (action: Action<NPC>, entity: NPC) => {
+          EventBus.emit(EventEmit.NPC_ATTACK, entity, action)
         },
       },
     ]

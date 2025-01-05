@@ -35,10 +35,10 @@ const App = () => {
       <PhaserGame ref={phaserRef} />
       <DebugSidebar />
       {isInteractionDecisionVisible && itemInteraction && (
-        <InteractionDecisionModal item={itemInteraction} onClose={onClose} />
+        <InteractionDecisionModal entity={itemInteraction} onClose={onClose} />
       )}
       {isInteractionDecisionVisible && npcInteraction && (
-        <InteractionDecisionModal npc={npcInteraction} onClose={onClose} />
+        <InteractionDecisionModal entity={npcInteraction} onClose={onClose} />
       )}
 
       <NPCDialog />

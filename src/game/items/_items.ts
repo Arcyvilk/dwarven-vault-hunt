@@ -6,13 +6,13 @@ export class Item {
   public id: string
   public data: ItemData
   public location: Location
-  public actions: Action[]
+  public actions: Action<Item>[]
 
   constructor(
     id: string,
     location: Location,
     data: ItemData,
-    actions: Action[],
+    actions: Action<Item>[],
   ) {
     this.id = id
     this.data = data
@@ -23,7 +23,7 @@ export class Item {
     this.actions = [
       // The actions from props must be first because when we search for action by its id
       // the first one will take precendence over the rest
-      ...actions.map((a: Action) => ({
+      ...actions.map((a: Action<Item>) => ({
         ...a,
         prompt: a.prompt.replace("%%%", this.data.name),
       })),
@@ -33,8 +33,8 @@ export class Item {
         key: "",
         prompt: `View the ${this.data.name}`,
         result: this.getRandomResult(resultsView),
-        fn: (action: Action) => {
-          EventBus.emit(EventEmit.ITEM_VIEW, this, action)
+        fn: (action: Action<Item>, entity: Item) => {
+          EventBus.emit(EventEmit.ITEM_VIEW, entity, action)
         },
       },
     ]

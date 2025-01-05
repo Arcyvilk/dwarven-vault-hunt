@@ -23,7 +23,7 @@ export const NPCDialog = () => {
 
 type NPCActionProps = {
   npc: NPC
-  action: Action
+  action: Action<NPC>
   onClose: () => void
 }
 

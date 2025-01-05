@@ -5,19 +5,19 @@ import { Action } from "../../game/scenes/ArcyScene/types"
 
 export const useNPC = () => {
   const [activeNPC, setActiveNPC] = useState<NPC>()
-  const [activeAction, setActiveAction] = useState<Action>()
+  const [activeAction, setActiveAction] = useState<Action<NPC>>()
 
-  EventBus.on(EventEmit.NPC_VIEW, (npc: NPC, action: Action) => {
+  EventBus.on(EventEmit.NPC_VIEW, (npc: NPC, action: Action<NPC>) => {
     setActiveAction(action)
     setActiveNPC(npc)
   })
 
-  EventBus.on(EventEmit.NPC_TALK, (npc: NPC, action: Action) => {
+  EventBus.on(EventEmit.NPC_TALK, (npc: NPC, action: Action<NPC>) => {
     setActiveAction(action)
     setActiveNPC(npc)
   })
 
-  EventBus.on(EventEmit.NPC_ATTACK, (npc: NPC, action: Action) => {
+  EventBus.on(EventEmit.NPC_ATTACK, (npc: NPC, action: Action<NPC>) => {
     setActiveAction(action)
     setActiveNPC(npc)
   })

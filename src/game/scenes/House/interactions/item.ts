@@ -20,9 +20,10 @@ export const Kufer = new Item(
       key: "",
       type: "item_other",
       prompt: `Open the %%%`,
-      result: "",
-      fn: (action: Action) => {
-        EventBus.emit(EventEmit.ITEM_OTHER, this, action)
+      result:
+        "This kufer is full of blankets, douvets and other good night sleep accessories.",
+      fn: (action: Action<Item>, entity: Item) => {
+        EventBus.emit(EventEmit.ITEM_OTHER, entity, action)
       },
     },
   ],

@@ -4,14 +4,9 @@ import { NPC } from "../../game/npcs"
 import { Item } from "../../game/items"
 import { useKeyboardNavigation } from "../../hooks"
 
-type Props = {
-  item?: Item
-  npc?: NPC
-  onClose: () => void
-}
-export const InteractionDecisionModal = ({ item, npc, onClose }: Props) => {
-  const rawActions = item?.actions ?? npc?.actions ?? []
-  const { actions } = useKeyboardNavigation(rawActions, onClose)
+type Props = { entity: Item | NPC; onClose: () => void }
+export const InteractionDecisionModal = ({ entity, onClose }: Props) => {
+  const { actions } = useKeyboardNavigation(entity, onClose)
 
   return (
     <Modal isOpen onClose={onClose}>

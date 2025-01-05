@@ -1,10 +1,10 @@
-export type Action = {
+export type Action<T> = {
   id: string
   type: ActionType
   key: string
   prompt: string
   result: string
-  fn: (action: Action) => void
+  fn: (action: Action<T>, entity: T) => void
 }
 
 type ActionType =
